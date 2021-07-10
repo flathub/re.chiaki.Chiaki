@@ -113,8 +113,8 @@ modules:
     sources:
       - type: git
         url: https://git.sr.ht/~thestr4ng3r/chiaki
-        tag: v2.1.0
-        commit: fcdc414692b33ecae1f30a19dc4cd81d4bd77121
+        tag: v2.1.1
+        commit: be9e5eb616fdf8870573d25232a7f2303b02d94a
       - type: patch
         path: appdata.patch
     post-install:
