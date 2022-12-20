@@ -27,7 +27,6 @@ cleanup-commands:
   # this, chiaki's flatpak fails to start with the following error:
   # bwrap: Can't mkdir /app/lib/ffmpeg: Read-only file system
   # error: ldconfig failed, exit status 256
-error: ldconfig failed, exit status 256
   - 'mkdir -p /app/lib/ffmpeg'
 modules:
   - name: protobuf-compilers
