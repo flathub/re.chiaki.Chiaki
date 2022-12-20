@@ -33,8 +33,8 @@ modules:
   - name: protobuf-compilers
     sources:
       - type: archive
-        url: https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protobuf-cpp-3.13.0.tar.gz
-        sha256: f8a547dfe143a9f61fadafba47fa6573713a33cb80909307c1502e26e1102298
+        url: https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protobuf-cpp-3.21.12.tar.gz
+        sha256: 4eab9b524aa5913c6fffb20b2a8abf5ef7f95a80bc0701f3a6dbb4c607f73460
 
   - name: python3-google
     buildsystem: simple
@@ -57,8 +57,8 @@ modules:
       - "pip3 install --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} protobuf"
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/25/ef/8f36bc7e4c3dcad241a9e7a51520d30712a7abc034343bed841ff4ea3289/protobuf-3.13.0.tar.gz
-        sha256: 6a82e0c8bb2bf58f606040cc5814e07715b2094caeba281e2e7d0b0e2e397db5
+        url: https://files.pythonhosted.org/packages/ba/dd/f8a01b146bf45ac12a829bbc599e6590aa6a6849ace7d28c42d77041d6ab/protobuf-4.21.12.tar.gz
+        sha256: 7cd532c4566d0e6feafecc1059d04c7915aec8e182d1cf7adee8b24ef1e2e6ab
 
   - name: python3-requests
     buildsystem: simple
