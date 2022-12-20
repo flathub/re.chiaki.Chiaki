@@ -2,6 +2,11 @@ app-id: re.chiaki.Chiaki
 runtime: org.kde.Platform
 runtime-version: '5.15-22.08'
 sdk: org.kde.Sdk
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: "lib/ffmpeg"
+    version: "22.08"
+    add-ld-path: "."
 command: chiaki
 rename-icon: chiaki
 rename-desktop-file: chiaki.desktop
@@ -17,32 +22,18 @@ finish-args:
   - --own-name=org.kde.*
   - --env=DBUS_FATAL_WARNINGS=0
   - --talk-name=org.freedesktop.ScreenSaver
-
+cleanup-commands:
+  # Some cargo-culting for ffmpeg; copied this from elsewhere.  If we don't add
+  # this, chiaki's flatpak fails to start with the following error:
+  # bwrap: Can't mkdir /app/lib/ffmpeg: Read-only file system
+  # error: ldconfig failed, exit status 256
+  - 'mkdir -p /app/lib/ffmpeg'
 modules:
   - name: protobuf-compilers
     sources:
       - type: archive
         url: https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protobuf-cpp-3.13.0.tar.gz
         sha256: f8a547dfe143a9f61fadafba47fa6573713a33cb80909307c1502e26e1102298
-
-  - name: ffmpeg
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /share/ffmpeg/examples
-    config-opts:
-      - --enable-shared
-      - --disable-static
-      - --enable-gnutls
-      - --disable-doc
-      - --disable-programs
-      - --disable-encoders
-      - --disable-muxers
-      - --enable-encoder=png
-    sources:
-      - type: archive
-        url: https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.xz
-        sha256: ad009240d46e307b4e03a213a0f49c11b650e445b1f8be0dda2a9212b34d2ffb
 
   - name: python3-google
     buildsystem: simple
