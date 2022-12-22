@@ -2,6 +2,11 @@ app-id: re.chiaki.Chiaki
 runtime: org.kde.Platform
 runtime-version: '5.15-22.08'
 sdk: org.kde.Sdk
+add-extensions:
+  org.freedesktop.Platform.ffmpeg-full:
+    directory: "lib/ffmpeg"
+    version: "22.08"
+    add-ld-path: "."
 command: chiaki
 rename-icon: chiaki
 rename-desktop-file: chiaki.desktop
@@ -17,32 +22,18 @@ finish-args:
   - --own-name=org.kde.*
   - --env=DBUS_FATAL_WARNINGS=0
   - --talk-name=org.freedesktop.ScreenSaver
-
+cleanup-commands:
+  # Some cargo-culting for ffmpeg; copied this from elsewhere.  If we don't add
+  # this, chiaki's flatpak fails to start with the following error:
+  # bwrap: Can't mkdir /app/lib/ffmpeg: Read-only file system
+  # error: ldconfig failed, exit status 256
+  - 'mkdir -p /app/lib/ffmpeg'
 modules:
   - name: protobuf-compilers
     sources:
       - type: archive
-        url: https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protobuf-cpp-3.13.0.tar.gz
-        sha256: f8a547dfe143a9f61fadafba47fa6573713a33cb80909307c1502e26e1102298
-
-  - name: ffmpeg
-    cleanup:
-      - /include
-      - /lib/pkgconfig
-      - /share/ffmpeg/examples
-    config-opts:
-      - --enable-shared
-      - --disable-static
-      - --enable-gnutls
-      - --disable-doc
-      - --disable-programs
-      - --disable-encoders
-      - --disable-muxers
-      - --enable-encoder=png
-    sources:
-      - type: archive
-        url: https://ffmpeg.org/releases/ffmpeg-4.3.1.tar.xz
-        sha256: ad009240d46e307b4e03a213a0f49c11b650e445b1f8be0dda2a9212b34d2ffb
+        url: https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protobuf-cpp-3.21.12.tar.gz
+        sha256: 4eab9b524aa5913c6fffb20b2a8abf5ef7f95a80bc0701f3a6dbb4c607f73460
 
   - name: python3-google
     buildsystem: simple
@@ -65,8 +56,8 @@ modules:
       - "pip3 install --no-index --find-links=\"file://${PWD}\" --prefix=${FLATPAK_DEST} protobuf"
     sources:
       - type: file
-        url: https://files.pythonhosted.org/packages/25/ef/8f36bc7e4c3dcad241a9e7a51520d30712a7abc034343bed841ff4ea3289/protobuf-3.13.0.tar.gz
-        sha256: 6a82e0c8bb2bf58f606040cc5814e07715b2094caeba281e2e7d0b0e2e397db5
+        url: https://files.pythonhosted.org/packages/ba/dd/f8a01b146bf45ac12a829bbc599e6590aa6a6849ace7d28c42d77041d6ab/protobuf-4.21.12.tar.gz
+        sha256: 7cd532c4566d0e6feafecc1059d04c7915aec8e182d1cf7adee8b24ef1e2e6ab
 
   - name: python3-requests
     buildsystem: simple
@@ -90,8 +81,7 @@ modules:
         sha256: 84ab92ed1c4d4f16916e05906b6b75a6c0fb5db821cc65e70cbd64a3e2a5eaae
 
   - name: chiaki
-    buildsystem: cmake
-    builddir: true
+    buildsystem: cmake-ninja
     sources:
       - type: git
         url: https://git.sr.ht/~thestr4ng3r/chiaki
@@ -100,4 +90,4 @@ modules:
       - type: patch
         path: appdata.patch
     post-install:
-      - "install -Dm755 ../scripts/psn-account-id.py /app/bin/psn-account-id"
+      - "install -Dm755 scripts/psn-account-id.py /app/bin/psn-account-id"
