@@ -85,7 +85,7 @@ modules:
       - type: git
         url: https://git.sr.ht/~thestr4ng3r/chiaki
         branch: master
-        commit: 4c8209762c1f822d2066367062170f47692abd54
+        commit: c2f09326702a723c3365c49a25d30047beecb154
       - type: patch
         path: appdata.patch
     post-install:
