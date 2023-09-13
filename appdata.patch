@@ -1,12 +1,13 @@
 diff --git a/gui/re.chiaki.Chiaki.appdata.xml b/gui/re.chiaki.Chiaki.appdata.xml
-index adb10ba..8c635d0 100644
+index adb10ba..36b89c2 100644
 --- a/gui/re.chiaki.Chiaki.appdata.xml
 +++ b/gui/re.chiaki.Chiaki.appdata.xml
-@@ -22,4 +22,9 @@
+@@ -22,4 +22,10 @@
    </screenshots>
    <update_contact>chiaki@metallic.software</update_contact>
    <content_rating type="oars-1.1" />
 +  <releases>
++    <release date="2023-08-20" version="2.2.0" />
 +    <release date="2021-01-24" version="2.1.1" />
 +    <release date="2021-01-15" version="2.1.0" />
 +    <release date="2020-12-29" version="2.0.1" />

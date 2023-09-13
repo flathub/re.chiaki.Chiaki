@@ -30,7 +30,7 @@ modules:
   - name: protobuf-compilers
     sources:
       - type: archive
-        url: https://github.com/protocolbuffers/protobuf/releases/download/v3.13.0/protobuf-cpp-3.21.12.tar.gz
+        url: https://github.com/protocolbuffers/protobuf/releases/download/v21.12/protobuf-cpp-3.21.12.tar.gz
         sha256: 4eab9b524aa5913c6fffb20b2a8abf5ef7f95a80bc0701f3a6dbb4c607f73460
 
   - name: python3-google
@@ -83,8 +83,8 @@ modules:
     sources:
       - type: git
         url: https://git.sr.ht/~thestr4ng3r/chiaki
-        branch: master
-        commit: c2f09326702a723c3365c49a25d30047beecb154
+        tag: v2.2.0
+        commit: 89368f63c99d67cde8868c0269b66a1b0c507397
       - type: patch
         path: appdata.patch
     post-install:
