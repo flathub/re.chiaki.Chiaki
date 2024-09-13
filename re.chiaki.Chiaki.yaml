@@ -18,7 +18,6 @@ finish-args:
   - --device=all
   - --allow=bluetooth
   - --socket=pulseaudio
-  - --own-name=org.kde.*
   - --env=DBUS_FATAL_WARNINGS=0
   - --talk-name=org.freedesktop.ScreenSaver
 cleanup-commands:
